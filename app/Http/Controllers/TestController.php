@@ -11,11 +11,15 @@ class TestController extends Controller
     public function __construct()
     {
         $this->database = \App\Services\FirebaseService::connect();
+
     }
 
     public function index() 
     {
-        return response()->json($this->database->getReference('test/blogs')->getValue());
+        $test = $this->database->getReference('test')->getValue();
+
+        return view('welcome',compact('test'));
+
     }
 
     public function create(Request $request) 
