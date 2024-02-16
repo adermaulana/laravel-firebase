@@ -16,13 +16,17 @@ class TestController extends Controller
 
     public function index() 
     {
-        $test = $this->database->getReference('test')->getValue();
+        $test = $this->database->getReference('test/blogs')->getValue();
 
         return view('welcome',compact('test'));
 
     }
 
-    public function create(Request $request) 
+    public function create(){
+        return view('create');
+    }
+
+    public function store(Request $request) 
     {
         $this->database
             ->getReference('test/blogs/' . $request['title'])
@@ -31,7 +35,7 @@ class TestController extends Controller
                 'content' => $request['content']
             ]);
 
-        return response()->json('blog has been created');
+        return redirect('/');
     }
 
     public function edit(Request $request) 
@@ -50,7 +54,7 @@ class TestController extends Controller
             ->getReference('test/blogs/' . $request['title'])
             ->remove();
 
-        return response()->json('blog has been deleted');
+        return redirect('/');
     }
 
 }

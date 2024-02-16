@@ -15,3 +15,6 @@ use App\Http\Controllers\TestController;
 */
 
 Route::get('/',[TestController::class,'index']);
+Route::get('/create',[TestController::class,'create']);
+Route::post('/create',[TestController::class,'store']);
+Route::delete('/delete/{id}',[TestController::class,'delete']);

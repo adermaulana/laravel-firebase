@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=s, initial-scale=1.0">
-    <title>Laravel Firebase</title>
-</head>
-<body>
 <!doctype html>
     <html lang="en">
     <head>
@@ -17,21 +9,31 @@
     <body>
         <div class="container mt-5">
             <h1>Laravel Firebase</h1>
-
+            <div>
+                <a class="btn btn-success" href="/create">Create Data</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
                     <th scope="col">No</th>
                     <th scope="col">Title</th>
                     <th scope="col">Content</th>
+                    <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach($test as $data => $item)
                     <tr>
-                    <th scope="row"> {{ $data }} </th>
-                    <th scope="row"> {{ $item['content'] }} </th>
-                    <th scope="row"> {{ $item['title'] }} </th>
+                    <td scope="row"> {{ $loop->iteration }} </td>
+                    <td scope="row"> {{ $item['title'] }} </td>
+                    <td scope="row"> {{ $item['content'] }} </td>
+                    <td>
+                        <form action="/delete/{{ $item['title'] }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                     </tr>
                 @endforeach
                 </tbody>
